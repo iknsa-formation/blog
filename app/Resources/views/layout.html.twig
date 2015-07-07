@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Symfony Blog{% endblock %}</title>
+</head>
+<body>
+	
+	{% block nav %}
+		{% include 'BlogAppBundle::navigation.html.twig' %}
+	{% endblock %}
+
+	{% block body %}{% endblock %}
+
+	{% block sidebar %}
+		{% include 'BlogAppBundle::sidebar.html.twig' %}
+	{% endblock %}
+
+</body>
+</html>
