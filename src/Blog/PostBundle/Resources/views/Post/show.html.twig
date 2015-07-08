@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Post</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Slug</th>
+                <td>{{ entity.slug }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Shortdescription</th>
+                <td>{{ entity.shortDescription }}</td>
+            </tr>
+            <tr>
+                <th>Longdescription</th>
+                <td>{{ entity.longDescription }}</td>
+            </tr>
+            <tr>
+                <th>Img</th>
+                <td>{{ entity.img }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('post') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('post_edit', { 'slug': entity.slug }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

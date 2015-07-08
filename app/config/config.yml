@@ -78,3 +78,12 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+# Stof Doctrine extensions configs
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable:   true
+            timestampable:   true
+            blameable: true

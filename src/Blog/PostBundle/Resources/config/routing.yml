@@ -1,0 +1,27 @@
+post:
+    path:     /post/
+    defaults: { _controller: BlogPostBundle:Post:index }
+
+post_new:
+    path:      /post/new/
+    defaults: { _controller: BlogPostBundle:Post:new }
+
+post_create:
+    path:      /post/create/
+    defaults: { _controller: BlogPostBundle:Post:create }
+
+post_edit:
+    path:      /post/edit/{slug}
+    defaults: { _controller: BlogPostBundle:Post:edit }
+
+post_update:
+    path:      /post/update/{slug}
+    defaults: { _controller: BlogPostBundle:Post:update }
+
+post_delete:
+    path:      /post/delete/{slug}
+    defaults: { _controller: BlogPostBundle:Post:delete }
+
+post_show:
+    path:      /{slug}
+    defaults: { _controller: BlogPostBundle:Post:show }
