@@ -1,4 +1,5 @@
-blog_
-=====
+IKNSA Blog
+==========
 
-A Symfony project created on July 7, 2015, 9:58 pm.
+A simple blog made with symfony.
+The production of the blog will be followed by a tutorial
