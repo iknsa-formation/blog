@@ -4,6 +4,8 @@ namespace Blog\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+// use Doctrine\Common\Collections;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Post
@@ -57,6 +59,19 @@ class Post
     private $slug;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Blog\CommentBundle\Entity\Comment")
+     * @ORM\JoinTable(name="blog_comment",
+     *          joinColumns={
+     *              @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
+     *          },
+     *          inverseJoinColumns={
+     *              @ORM\JoinColumn(name="comment_id", referencedColumnName="id", unique=true)
+     *          }
+     *      )
+     */
+    private $comment;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -66,6 +81,7 @@ class Post
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->phonenumbers = new ArrayCollection();
     }
 
 

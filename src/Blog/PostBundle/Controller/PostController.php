@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Blog\PostBundle\Entity\Post;
 use Blog\PostBundle\Form\PostType;
+use Blog\PostBundle\Controller\PostCommentController;
 
 /**
  * Post controller.
@@ -115,7 +116,8 @@ class PostController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
-
+$newComment = $this->get('blog_comment.create');
+var_dump($newComment);die();
         $deleteForm = $this->createDeleteForm($slug);
 
         return array(

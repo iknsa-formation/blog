@@ -1,0 +1,3 @@
+services:
+   blog_comment.create:
+       class: Blog\CommentBundle\Controller\NewCommentController
