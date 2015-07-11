@@ -60,12 +60,12 @@ class Post
 
     /**
      * @ORM\ManyToMany(targetEntity="Blog\CommentBundle\Entity\Comment")
-     * @ORM\JoinTable(name="blog_comment",
+     * @ORM\JoinTable(name="post_comment",
      *          joinColumns={
-     *              @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
+     *              @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      *          },
      *          inverseJoinColumns={
-     *              @ORM\JoinColumn(name="comment_id", referencedColumnName="id", unique=true)
+     *              @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
      *          }
      *      )
      */

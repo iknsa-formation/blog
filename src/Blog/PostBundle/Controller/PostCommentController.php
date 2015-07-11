@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\CommentBundle\Controller;
+namespace Blog\PostBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -8,26 +8,30 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Blog\CommentBundle\Entity\Comment;
-use Blog\CommentBundle\Form\CommentType;
+use Blog\PostBundle\Entity\Post;
+use Blog\PostBundle\Form\PostCommentType;
+use Blog\PostBundle\Controller\PostCommentController;
 
 /**
- * Comment controller.
+ * Post controller.
  *
- * @Route("/comment/")
+ * @Route("/post/")
  */
-class NewCommentController extends Controller
-{    
+class PostCommentController extends Controller
+{
+    // Adding comment entity to post
+
     /**
      * Creates a new Comment entity.
      *
-     * @Route("/", name="comment_create")
+     * @Route("/post/comment/create", name="post_comment_create")
      * @Method("POST")
      * @Template("BlogCommentBundle:Comment:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createPostCommentAction(Request $request)
     {
         $entity = new Comment();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createPostCommentCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -35,7 +39,7 @@ class NewCommentController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('comment_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('post_comment_show', array('slug' => $entity->getSlug())));
         }
 
         return array(
@@ -51,10 +55,10 @@ class NewCommentController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Comment $entity)
+    private function createPostCommentCreateForm(Comment $entity)
     {
-        $form = $this->createForm(new CommentType(), $entity, array(
-            'action' => $this->generateUrl('comment_create'),
+        $form = $this->createForm(new PostCommentType(), $entity, array(
+            'action' => $this->generateUrl('post_comment_create'),
             'method' => 'POST',
         ));
 
@@ -66,14 +70,18 @@ class NewCommentController extends Controller
     /**
      * Displays a form to create a new Comment entity.
      *
-     * @Route("/new", name="comment_new")
+     * @Route("/post/comment/new", name="post_comment_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newPostCommentAction($slug)
     {
         $entity = new Comment();
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createPostCommentCreateForm($entity);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $post = $em->getRepository('BlogPostBundle:Post')->findBySlug($slug);
 
         return array(
             'entity' => $entity,

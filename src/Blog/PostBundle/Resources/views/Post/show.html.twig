@@ -45,4 +45,11 @@
         </li>
         <li>{{ form(delete_form) }}</li>
     </ul>
+
+    <p>============================================</p>
+
+    {{ form(comment_form) }}
+
+    {# render(controller('BlogPostBundle:Post:newPostComment', slug: entity.slug)) #}
+
 {% endblock %}
