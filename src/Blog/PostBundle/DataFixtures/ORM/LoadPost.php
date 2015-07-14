@@ -2,11 +2,12 @@
 
 namespace Blog\PostBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Blog\PostBundle\Entity\Post;
 
-class LoadPost implements FixtureInterface
+class LoadPost extends AbstractFixture implements FixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -34,6 +35,16 @@ class LoadPost implements FixtureInterface
         $initialPost->setImg('path/to/image');
         $manager->persist($initialPost);
 
+        $this->addReference('initial-post', $initialPost);
+
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 }
