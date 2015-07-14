@@ -4,6 +4,9 @@ namespace Blog\PostBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections;
+use Doctrine\Common\Collections\ArrayCollection;
+use Blog\CommentBundle\Entity\Comment;
 
 /**
  * Post
@@ -57,6 +60,11 @@ class Post
     private $slug;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Blog\CommentBundle\Entity\Comment", cascade={"persist"})
+     */
+    private $comment;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -66,6 +74,7 @@ class Post
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->comment = new ArrayCollection();
     }
 
 
@@ -210,10 +219,22 @@ class Post
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
         return $this->slug;
+    }
+    
+    public function setComment(\Blog\CommentBundle\Entity\Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

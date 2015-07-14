@@ -25,3 +25,11 @@ post_delete:
 post_show:
     path:      /{slug}
     defaults: { _controller: BlogPostBundle:Post:show }
+
+post_comment_new:
+    path: /post/comment/new/{slug}
+    defaults: { _controller: BlogPostBundle:Post:newPostComment}
+
+post_comment_create:
+    path: /post/comment/create
+    defaults: { _controller: BlogPostBundle:Post:createPostComment }
