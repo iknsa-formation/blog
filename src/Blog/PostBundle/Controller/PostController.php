@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Blog\CommentBundle\Entity\Comment;
 use Blog\PostBundle\Entity\Post;
+use Blog\PostBundle\Form\PostType;
+use Blog\PostBundle\Entity\PostComment;
 use Blog\PostBundle\Form\PostCommentType;
 use Blog\PostBundle\Controller\PostCommentController;
 
@@ -263,17 +265,27 @@ class PostController extends Controller
     public function createPostCommentAction(Request $request)
     {
         $entity = new Comment();
+
         $form = $this->createPostCommentCreateForm($entity);
         $form->handleRequest($request);
 
-        dump($form);
-
         if ($form->isValid()) {
+
+            $allRequest = $request->request->all();
+            $token = $allRequest["blog_post_bundle_post_comment"]['token'];
+
             $em = $this->getDoctrine()->getManager();
+
+            $entity->setComment($allRequest["blog_post_bundle_post_comment"]['comment']['comment']);
+
+            $post = $em->getRepository('BlogPostBundle:Post')->findBySlug($token);
+            $post[0]->setComment($entity);
+
             $em->persist($entity);
+            $em->persist($post[0]);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_comment_show', array('slug' => $entity->getSlug())));
+            return $this->redirect($this->generateUrl('post_show', array('slug' => $token)));
         }
 
         return array(
@@ -289,7 +301,7 @@ class PostController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createPostCommentCreateForm(Comment $entity, $slug)
+    private function createPostCommentCreateForm(Comment $entity, $slug = null)
     {
         $form = $this->createForm(new PostCommentType(), $entity, array(
             'action' => $this->generateUrl('post_comment_create'),
