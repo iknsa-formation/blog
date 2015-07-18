@@ -47,9 +47,14 @@
     </ul>
 
     <p>============================================</p>
+    
+    {% for commentInfo in entity.comment %}
+        <div>
+            {{commentInfo.comment}}
+        </div>
+    {% endfor %}
+
+    <p>============================================</p>
 
     {{ form(comment_form) }}
-
-    {# render(controller('BlogPostBundle:Post:newPostComment', slug: entity.slug)) #}
-
 {% endblock %}
