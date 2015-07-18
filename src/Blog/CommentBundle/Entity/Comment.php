@@ -36,6 +36,11 @@ class Comment
     private $createdAt;
 
     /**
+     * @ORM\OneToOne(targetEntity="Blog\UserBundle\Entity\User")
+     */
+    private $user;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
@@ -130,5 +135,28 @@ class Comment
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Blog\UserBundle\Entity\User $user
+     * @return Comment
+     */
+    public function setUser(\Blog\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Blog\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

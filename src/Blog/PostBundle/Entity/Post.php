@@ -65,6 +65,11 @@ class Post
     private $comment;
 
     /**
+     * @ORM\OneToOne(targetEntity="Blog\UserBundle\Entity\User")
+     */
+    private $user;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -236,5 +241,51 @@ class Post
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Blog\CommentBundle\Entity\Comment $comment
+     * @return Post
+     */
+    public function addComment(\Blog\CommentBundle\Entity\Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Blog\CommentBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Blog\CommentBundle\Entity\Comment $comment)
+    {
+        $this->comment->removeElement($comment);
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Blog\UserBundle\Entity\User $user
+     * @return Post
+     */
+    public function setUser(\Blog\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Blog\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

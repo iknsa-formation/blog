@@ -54,6 +54,9 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            $entity->setUser($this->getUser());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -270,6 +273,8 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            $entity->setUser($this->getUser());
 
             $allRequest = $request->request->all();
             $token = $allRequest["blog_post_bundle_post_comment"]['token'];
