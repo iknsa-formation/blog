@@ -1,13 +1,42 @@
+# https://symfony.com/doc/current/book/security.html
+# https://symfony.com/doc/current/reference/configuration/security.html
 security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        Blog\UserBundle\Entity\User: bcrypt
+
+    role_hierarchy:
+        ROLE_WEBMASTER: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_WEBMASTER]
 
     providers:
+        chain_providers:
+            chain:
+                providers: [in_memory, user_db]
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    khalid:
+                        password: khalid
+                        roles: ROLE_ADMIN
+        user_db:
+            entity: { class: Blog\UserBundle\Entity\User, property: username }
 
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
-            security: false
-
         main:
+            pattern: /.*
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                always_use_default_target_path: false
+                default_target_path: /
+            logout:
+                path: /logout
+                target: /
             anonymous: ~
+            security: true
+
+    access_control:
+        - { path: /user/, roles: ROLE_USER }
+        - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }

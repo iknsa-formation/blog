@@ -1,0 +1,17 @@
+user:
+    path:     /user/
+    defaults: { _controller: BlogUserBundle:User:index }
+
+login:
+    path:     /login
+    defaults: { _controller: BlogUserBundle:Security:login }
+
+login_check:
+    path:     /login_check
+
+user_logout:
+    path:     /logout/
+
+account:
+    path: /
+    defaults: { _controller: BlogAppBundle:App:index }
