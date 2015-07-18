@@ -1,6 +1,6 @@
 blog_user:
     resource: "@BlogUserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /user/
 
 blog_comment:
     resource: "@BlogCommentBundle/Resources/config/routing.yml"

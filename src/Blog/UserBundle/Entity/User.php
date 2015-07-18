@@ -3,15 +3,15 @@
 namespace Blog\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
  *
- * @ORM\Table()
+ * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Blog\UserBundle\Entity\UserRepository")
  */
-class User implements UserInterface
+class User extends BaseUser
 {
     /**
      * @var integer
@@ -20,40 +20,19 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
     private $firstname;
 
@@ -66,75 +45,6 @@ class User implements UserInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = password_hash($password, PASSWORD_BCRYPT);
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -182,16 +92,4 @@ class User implements UserInterface
     {
         return $this->firstname;
     }
-
-    public function getSalt()
-    {
-        return null;
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    public function eraseCredentials(){}
 }

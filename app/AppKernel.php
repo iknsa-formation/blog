@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             
             new Blog\AppBundle\BlogAppBundle(),
             new Blog\PostBundle\BlogPostBundle(),
