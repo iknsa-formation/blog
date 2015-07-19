@@ -33,11 +33,12 @@ class LoadPost extends AbstractFixture implements FixtureInterface
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         ');
         $initialPost->setImg('path/to/image');
+        // $initialPost->setUser($this->getReference("user-user"));
         $manager->persist($initialPost);
 
-        $this->addReference('initial-post', $initialPost);
-
         $manager->flush();
+
+        $this->addReference('initial-post', $initialPost);
     }
 
     /**
@@ -45,6 +46,6 @@ class LoadPost extends AbstractFixture implements FixtureInterface
      */
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 }

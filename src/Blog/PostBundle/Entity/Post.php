@@ -243,28 +243,28 @@ class Post
         return $this->comment;
     }
 
-    /**
-     * Add comment
-     *
-     * @param \Blog\CommentBundle\Entity\Comment $comment
-     * @return Post
-     */
-    public function addComment(\Blog\CommentBundle\Entity\Comment $comment)
-    {
-        $this->comment[] = $comment;
+    // /**
+    //  * Add comment
+    //  *
+    //  * @param \Blog\CommentBundle\Entity\Comment $comment
+    //  * @return Post
+    //  */
+    // public function addComment(\Blog\CommentBundle\Entity\Comment $comment)
+    // {
+    //     $this->comment[] = $comment;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * Remove comment
-     *
-     * @param \Blog\CommentBundle\Entity\Comment $comment
-     */
-    public function removeComment(\Blog\CommentBundle\Entity\Comment $comment)
-    {
-        $this->comment->removeElement($comment);
-    }
+    // /**
+    //  * Remove comment
+    //  *
+    //  * @param \Blog\CommentBundle\Entity\Comment $comment
+    //  */
+    // public function removeComment(\Blog\CommentBundle\Entity\Comment $comment)
+    // {
+    //     $this->comment->removeElement($comment);
+    // }
 
     /**
      * Set user
