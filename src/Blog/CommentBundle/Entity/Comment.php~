@@ -43,13 +43,14 @@ class Comment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
     
     public function __toString()
@@ -134,28 +135,5 @@ class Comment
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Blog\UserBundle\Entity\User $user
-     * @return Comment
-     */
-    public function setUser(\Blog\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Blog\UserBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }

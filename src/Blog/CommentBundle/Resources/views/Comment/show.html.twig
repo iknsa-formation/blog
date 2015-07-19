@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <th>Updatedat</th>
-                <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>

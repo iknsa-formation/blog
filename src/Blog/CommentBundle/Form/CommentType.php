@@ -16,8 +16,6 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('comment')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
     
