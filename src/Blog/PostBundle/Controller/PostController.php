@@ -10,9 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Blog\CommentBundle\Entity\Comment;
 use Blog\PostBundle\Entity\Post;
 use Blog\PostBundle\Form\PostType;
-use Blog\PostBundle\Entity\PostComment;
 use Blog\PostBundle\Form\PostCommentType;
-use Blog\PostBundle\Controller\PostCommentController;
 
 /**
  * Post controller.
@@ -131,7 +129,7 @@ class PostController extends Controller
         return array(
             'entity'      => $entity[0],
             'delete_form' => $deleteForm->createView(),
-            'comment_form' => $commentForm['form'],
+            'comment_form' => $commentForm['form']
         );
     }
 

@@ -53,8 +53,10 @@
             {% if commentInfo.user %}
                 <i>{{ commentInfo.user.firstname }}</i>
                 <i>{{ commentInfo.user.name }}</i>
+            {% else %}
+                Annonymous
             {% endif %}
-        </div>
+        </div><br><br>
     {% endfor %}
 
     <p>============================================</p>
