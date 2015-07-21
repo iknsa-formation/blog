@@ -36,7 +36,7 @@ class Comment
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Blog\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Blog\UserBundle\Entity\User")
      */
     private $user;
 

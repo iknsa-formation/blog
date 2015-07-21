@@ -47,10 +47,13 @@
     </ul>
 
     <p>============================================</p>
-    
     {% for commentInfo in entity.comment %}
         <div>
-            {{commentInfo.comment}}
+            {{commentInfo.comment}} 
+            {% if commentInfo.user %}
+                <i>{{ commentInfo.user.firstname }}</i>
+                <i>{{ commentInfo.user.name }}</i>
+            {% endif %}
         </div>
     {% endfor %}
 
